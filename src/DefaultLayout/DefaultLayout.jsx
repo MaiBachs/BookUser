@@ -6,11 +6,11 @@ import Footer from '../component/Footer/Footer';
 
 const cx = classNames.bind(styles);
 
-const DefaultLayout = ({ children }) => {
+const DefaultLayout = ({ children, listBookCT2 }) => {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('header')}>
-                <Header />
+                <Header listBookCT2={listBookCT2} />
             </div>
             <div className={cx('content')}>{children}</div>
             <div className={cx('footer')}>

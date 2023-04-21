@@ -8,13 +8,26 @@ function GrillBook(props) {
     const list1 = [...props.listBookCT1.bookEntityList];
     let list2 = [];
     let page = props.listBookCT1.page;
-    for (let i = 0; i < list1.length; i += 3) {
-        if (list1[i + 1] && list1[i + 2]) {
-            list2.push([list1[i], list1[i + 1], list1[i + 2]]);
-        } else if (list1[i + 1] && !list1[i + 2]) {
-            list2.push([list1[i], list1[i + 1]]);
-        } else {
-            list2.push([list1[i]]);
+    let sqrtsize = Math.sqrt(props.size);
+    for (let i = 0; i < list1.length; i += sqrtsize) {
+        if (sqrtsize === 3) {
+            if (list1[i + 1] && list1[i + 2]) {
+                list2.push([...list1.slice(i, i + 3)]);
+            } else if (list1[i + 1] && !list1[i + 2]) {
+                list2.push([...list1.slice(i, (i = 2))]);
+            } else {
+                list2.push([...list1.slice(i, i + 1)]);
+            }
+        } else if (sqrtsize === 4) {
+            if (list1[i + 1] && list1[i + 2] && list1[i + 3]) {
+                list2.push([...list1.slice(i, i + 4)]);
+            } else if (list1[i + 1] && list1[i + 2]) {
+                list2.push([...list1.slice(i, i + 3)]);
+            } else if (list1[i + 1] && !list1[i + 2]) {
+                list2.push([...list1.slice(i, (i = 2))]);
+            } else {
+                list2.push([...list1.slice(i, i + 1)]);
+            }
         }
     }
     let indexPage = [];

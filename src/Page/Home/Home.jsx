@@ -50,7 +50,7 @@ function Home() {
 
     return (
         <div className={cx('wrapper')}>
-            <DefaultLayout>
+            <DefaultLayout listBookCT2={listBookCT2} setListBookCT2={setListBookCT2}>
                 <div>
                     <div className={cx('slide')}>
                         <Slide />
@@ -69,7 +69,7 @@ function Home() {
                         </div>
                         <div className={cx('free-hot')}>
                             <div className={cx('title-free-hot')}>Tất cả sách</div>
-                            <GrillBook listBookCT1={listBookCT1} setListBookCT1={setListBookCT1} />
+                            <GrillBook listBookCT1={listBookCT1} setListBookCT1={setListBookCT1} size={size} />
                         </div>
                     </div>
                     <div className={cx('content2')}>

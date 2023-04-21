@@ -11,12 +11,13 @@ import { useState, useCallback } from 'react';
 import Login from './Login';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import TextField from '@mui/material/TextField';
 
 const { SubMenu } = Menu;
 
 const cx = classNames.bind(styles);
 
-function Header() {
+function Header(props) {
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -43,6 +44,15 @@ function Header() {
             });
     };
 
+    const handleLogout = () => {
+        if (window.confirm('Bạn có chắc chắn muốn đăng xuất?')) {
+            localStorage.removeItem('token');
+            navigate('/home');
+        } else {
+            return;
+        }
+    };
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('header-top')}>
@@ -58,6 +68,21 @@ function Header() {
                                 handleChange(event);
                             }}
                         ></input>
+                        <ul className={cx('result-search')}>
+                            {props.listBookCT2
+                                .filter((book) => {
+                                    return book.bookName.toLowerCase().includes(value.toLowerCase());
+                                })
+                                .map((book) => {
+                                    return (
+                                        <li className={cx('list-book-search')}>
+                                            <Link to="/detailbook" state={book}>
+                                                {book.bookName}
+                                            </Link>
+                                        </li>
+                                    );
+                                })}
+                        </ul>
                         <button onClick={handleSearch}>
                             <AiOutlineSearch className={cx('search-icon')} />
                             Tìm kiếm
@@ -73,7 +98,11 @@ function Header() {
                             <RiVipDiamondFill className={cx('vip-icon')} />
                         </a>
                     </Tippy>
-                    <button onClick={handleOpen}>ĐĂNG NHẬP</button>
+                    {localStorage.getItem('token') ? (
+                        <button onClick={handleLogout}>ĐĂNG XUẤT</button>
+                    ) : (
+                        <button onClick={handleOpen}>ĐĂNG NHẬP</button>
+                    )}
                     <Login open={open} handleOpen={handleOpen} handleClose={handleClose} />
                 </div>
             </div>
@@ -86,9 +115,78 @@ function Header() {
                         <div>
                             <Menu className={cx('menu')}>
                                 <SubMenu className={cx('submenu')} title="Danh mục">
-                                    <Menu.Item key="setting:1">Option 1</Menu.Item>
-                                    <Menu.Item key="setting:2">Option 2</Menu.Item>
-                                    <Menu.Item key="setting:3">Option 3</Menu.Item>
+                                    <Menu.Item key="setting:1">
+                                        <Link
+                                            style={{ textDecoration: 'none' }}
+                                            to="/bookbycategory"
+                                            state={'Trinh thám - Kinh dị'}
+                                        >
+                                            Trinh thám - Kinh dị
+                                        </Link>
+                                    </Menu.Item>
+                                    <Menu.Item key="setting:2">
+                                        <Link
+                                            style={{ textDecoration: 'none' }}
+                                            to="/bookbycategory"
+                                            state={'Viễn tưởng - Giả tưởng'}
+                                        >
+                                            Viễn tưởng - Giả tưởng
+                                        </Link>
+                                    </Menu.Item>
+                                    <Menu.Item key="setting:3">
+                                        <Link
+                                            style={{ textDecoration: 'none' }}
+                                            to="/bookbycategory"
+                                            state={'Khởi nghiệp - Làm giàu'}
+                                        >
+                                            Khởi nghiệp - Làm giàu
+                                        </Link>
+                                    </Menu.Item>
+                                    <Menu.Item key="setting:4">
+                                        <Link
+                                            style={{ textDecoration: 'none' }}
+                                            to="/bookbycategory"
+                                            state={'Marketing - Bán hàng'}
+                                        >
+                                            Marketing - Bán hàng
+                                        </Link>
+                                    </Menu.Item>
+                                    <Menu.Item key="setting:5">
+                                        <Link
+                                            style={{ textDecoration: 'none' }}
+                                            to="/bookbycategory"
+                                            state={'Quản trị - Lãnh đạo'}
+                                        >
+                                            Quản trị - Lãnh đạo
+                                        </Link>
+                                    </Menu.Item>
+                                    <Menu.Item key="setting:6">
+                                        <Link
+                                            style={{ textDecoration: 'none' }}
+                                            to="/bookbycategory"
+                                            state={'Tài chính cá nhân'}
+                                        >
+                                            Tài chính cá nhân
+                                        </Link>
+                                    </Menu.Item>
+                                    <Menu.Item key="setting:7">
+                                        <Link
+                                            style={{ textDecoration: 'none' }}
+                                            to="/bookbycategory"
+                                            state={'Phát triển cá nhân'}
+                                        >
+                                            Phát triển cá nhân
+                                        </Link>
+                                    </Menu.Item>
+                                    <Menu.Item key="setting:8">
+                                        <Link
+                                            style={{ textDecoration: 'none' }}
+                                            to="/bookbycategory"
+                                            state={'Doanh nhân - Bài học kinh doanh'}
+                                        >
+                                            Doanh nhân - Bài học kinh doanh
+                                        </Link>
+                                    </Menu.Item>
                                 </SubMenu>
                             </Menu>
                         </div>

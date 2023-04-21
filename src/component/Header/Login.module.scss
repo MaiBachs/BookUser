@@ -68,6 +68,9 @@ h2 {
     font-size: 14px;
     outline: none;
     border: none;
+    &:hover {
+        background-color: #078168;
+    }
 }
 .box-auth-panel {
     display: flex;
