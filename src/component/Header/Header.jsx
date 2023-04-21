@@ -22,8 +22,9 @@ function Header(props) {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-
+    localStorage.setItem('listBookCT2', props.listBookCT2);
     const [value, setValue] = useState('');
+
     const [result, setResult] = useState([]);
     const handleChange = (event) => {
         setValue(event.target.value);
@@ -69,19 +70,21 @@ function Header(props) {
                             }}
                         ></input>
                         <ul className={cx('result-search')}>
-                            {props.listBookCT2
-                                .filter((book) => {
-                                    return book.bookName.toLowerCase().includes(value.toLowerCase());
-                                })
-                                .map((book) => {
-                                    return (
-                                        <li className={cx('list-book-search')}>
-                                            <Link to="/detailbook" state={book}>
-                                                {book.bookName}
-                                            </Link>
-                                        </li>
-                                    );
-                                })}
+                            {typeof props.listBookCT2 !== 'undefined' &&
+                                typeof props.listBookCT2 !== 'null' &&
+                                props.listBookCT2
+                                    .filter((book) => {
+                                        return book.bookName.toLowerCase().includes(value.toLowerCase());
+                                    })
+                                    .map((book) => {
+                                        return (
+                                            <li className={cx('list-book-search-li')}>
+                                                <Link className={cx('list-book-search')} to="/detailbook" state={book}>
+                                                    {book.bookName}
+                                                </Link>
+                                            </li>
+                                        );
+                                    })}
                         </ul>
                         <button onClick={handleSearch}>
                             <AiOutlineSearch className={cx('search-icon')} />

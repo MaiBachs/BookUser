@@ -48,32 +48,8 @@ function Login(props) {
             .post('https://host.up.railway.app/api/v1/auth/login', { ...loginForm })
             .then((response) => {
                 localStorage.setItem('token', response.data.token);
-                console.log(localStorage.getItem('token'));
                 toastr.success('Đăng nhập thành công');
-                axios
-                    .get('https://host.up.railway.app/pagebusiness', {
-                        headers: { Authorization: `Bearer ${response.data.token}` },
-                    })
-                    .then((response) => {
-                        const token = localStorage.getItem('token'); // thay 'your_token' bằng token của bạn
-                        const url = 'https://elegant-eclair-5f5283.netlify.app/'; // thay 'admin.yourdomain.com/api' bằng địa chỉ API của giao diện admin
-
-                        const requestOptions = {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ token: token }),
-                        };
-
-                        fetch(url, requestOptions)
-                            .then((response) => response.json())
-                            .then((data) => console.log(data))
-                            .catch((error) => console.error(error));
-
-                        Linking.openURL('http://localhost:');
-                    })
-                    .catch((error) => {
-                        navigate('/');
-                    });
+                navigate('/');
             })
             .catch((error) => {
                 console.log(error);

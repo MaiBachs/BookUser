@@ -56,7 +56,7 @@ function GrillBook(props) {
     return (
         <>
             <div class="container ms-2 mt-2">
-                <div class="row">
+                <div class="row test">
                     {list2.map((bookList) => {
                         return (
                             <>
