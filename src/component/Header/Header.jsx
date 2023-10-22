@@ -1,17 +1,15 @@
 import React from 'react';
 import styles from './Header.module.scss';
 import classNames from 'classnames/bind';
-import { AiOutlineSearch, AiOutlineUnorderedList } from 'react-icons/ai';
-import { RiVipDiamondFill } from 'react-icons/ri';
+import { AiOutlineSearch, AiOutlineUnorderedList, AiFillCreditCard, AiOutlineHome } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { Menu } from 'antd';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'; // optional
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import Login from './Login';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import TextField from '@mui/material/TextField';
+import Register from './Register';
 
 const { SubMenu } = Menu;
 
@@ -22,27 +20,44 @@ function Header(props) {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    localStorage.setItem('listBookCT2', props.listBookCT2);
+
+    const [open1, setOpen1] = useState(false);
+    const handleOpen1 = () => setOpen1(true);
+    const handleClose1 = () => setOpen1(false);
+
     const [value, setValue] = useState('');
 
-    const [result, setResult] = useState([]);
+    let resultSearch = [];
     const handleChange = (event) => {
         setValue(event.target.value);
+        handleMouseEnter(event);
     };
 
-    const handleSearch = () => {
+    const handleSearch = (event) => {
+        if (event.keyCode === 13) {
+            if (value === '') {
+                return;
+            }
+            resultSearch = [
+                ...props.listBookCT2.filter((book) => {
+                    return book.bookName.toLowerCase().includes(value.toLowerCase());
+                }),
+            ];
+
+            navigate('/listbooksearch', { state: [...resultSearch] });
+        }
+    };
+    const handleSearch1 = (event) => {
         if (value === '') {
             return;
         }
-        axios
-            .post('https://host.up.railway.app/getBookByName', { bookName: value })
-            .then((response) => {
-                setResult(response.data);
-                navigate('/detailbook', { state: response.data[0] });
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        resultSearch = [
+            ...props.listBookCT2.filter((book) => {
+                return book.bookName.toLowerCase().includes(value.toLowerCase());
+            }),
+        ];
+
+        navigate('/listbooksearch', { state: [...resultSearch] });
     };
 
     const handleLogout = () => {
@@ -51,6 +66,14 @@ function Header(props) {
             navigate('/home');
         } else {
             return;
+        }
+    };
+    const handleClickSearch = () => {
+        navigate('/home');
+    };
+    const handleMouseEnter = (event) => {
+        if (props.check === true) {
+            event.target.focus();
         }
     };
 
@@ -63,30 +86,42 @@ function Header(props) {
                     </div>
                     <div className={cx('search')}>
                         <input
+                            autofocus={true}
                             placeholder="Nhập tên sách"
                             value={value}
                             onChange={(event) => {
                                 handleChange(event);
                             }}
+                            onKeyDown={handleSearch}
+                            onClick={handleClickSearch}
+                            onMouseEnter={handleMouseEnter}
                         ></input>
-                        <ul className={cx('result-search')}>
-                            {typeof props.listBookCT2 !== 'undefined' &&
-                                typeof props.listBookCT2 !== 'null' &&
-                                props.listBookCT2
-                                    .filter((book) => {
-                                        return book.bookName.toLowerCase().includes(value.toLowerCase());
-                                    })
-                                    .map((book) => {
-                                        return (
-                                            <li className={cx('list-book-search-li')}>
-                                                <Link className={cx('list-book-search')} to="/detailbook" state={book}>
-                                                    {book.bookName}
-                                                </Link>
-                                            </li>
-                                        );
-                                    })}
-                        </ul>
-                        <button onClick={handleSearch}>
+                        {value !== '' && (
+                            <ul className={cx('result-search')}>
+                                {typeof props.listBookCT2 !== 'undefined' &&
+                                    props.listBookCT2
+                                        .filter((book) => {
+                                            if (value === '') {
+                                                return 1 < 0;
+                                            }
+                                            return book.bookName.toLowerCase().includes(value.toLowerCase());
+                                        })
+                                        .map((book) => {
+                                            return (
+                                                <li className={cx('list-book-search-li')}>
+                                                    <Link
+                                                        className={cx('list-book-search')}
+                                                        to="/detailbook"
+                                                        state={book}
+                                                    >
+                                                        {book.bookName}
+                                                    </Link>
+                                                </li>
+                                            );
+                                        })}
+                            </ul>
+                        )}
+                        <button onClick={handleSearch1}>
                             <AiOutlineSearch className={cx('search-icon')} />
                             Tìm kiếm
                         </button>
@@ -96,17 +131,23 @@ function Header(props) {
                     <a>
                         <img src="https://ebook.waka.vn/themes/desktop/images/hieu-soi.png" alt="logo"></img>
                     </a>
-                    <Tippy content="Vip" className={cx('tippy')} theme="tomato">
-                        <a href="">
-                            <RiVipDiamondFill className={cx('vip-icon')} />
-                        </a>
-                    </Tippy>
+                    {localStorage.getItem('token') && (
+                        <Tippy content="Làm thẻ" className={cx('tippy')} theme="tomato">
+                            <Link to="/registercard">
+                                <AiFillCreditCard
+                                    className={cx('card-icon')}
+                                    style={{ color: '#eeb815', fontSize: '46px', paddingTop: '10px' }}
+                                />
+                            </Link>
+                        </Tippy>
+                    )}
                     {localStorage.getItem('token') ? (
                         <button onClick={handleLogout}>ĐĂNG XUẤT</button>
                     ) : (
                         <button onClick={handleOpen}>ĐĂNG NHẬP</button>
                     )}
-                    <Login open={open} handleOpen={handleOpen} handleClose={handleClose} />
+                    <Login open={open} handleOpen={handleOpen} handleClose={handleClose} handleOpen1={handleOpen1} />
+                    <Register open1={open1} handleOpen1={handleOpen1} handleClose1={handleClose1} />
                 </div>
             </div>
             <div className={cx('header-bottom')}>
@@ -195,19 +236,26 @@ function Header(props) {
                         </div>
                     </li>
                     <li>
-                        <Link className={cx('link-menu')}>Sách mới nhất</Link>
+                        <Link to="/home" className={cx('link-menu')}>
+                            <AiOutlineHome className={cx('home-icon')} />
+                            Trang chủ
+                        </Link>
                     </li>
                     <li>
-                        <Link className={cx('link-menu')}>Bảng xếp hạng</Link>
+                        <Link className={cx('link-menu')} to="/topbook">
+                            Bảng xếp hạng
+                        </Link>
                     </li>
                     <li>
-                        <Link className={cx('link-menu')}>Miễn phí HOT</Link>
+                        <Link className={cx('link-menu')} to="/listbookborrowing">
+                            Danh sách mượn
+                        </Link>
                     </li>
                     <li>
-                        <Link className={cx('link-menu')}>Tuyển tập</Link>
+                        <Link className={cx('link-menu-not')}>Tuyển tập</Link>
                     </li>
                     <li>
-                        <Link className={cx('link-menu')}>Khuyên đọc</Link>
+                        <Link className={cx('link-menu-not')}>Khuyên đọc</Link>
                     </li>
                 </ul>
             </div>

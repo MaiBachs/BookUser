@@ -37,6 +37,11 @@ function DetailBook() {
                             <span>Nhà xuất bản: updating</span>
                             <span>Ngày cập nhật: updating</span>
                             <span>Gói cước áp dụn: Hội viên</span>
+                            <button>
+                                <a className={cx('read-book')} href={bookCT2.preview}>
+                                    Đọc thử
+                                </a>
+                            </button>
                             <p>{bookCT2.bookDescription}</p>
                         </div>
                     </div>

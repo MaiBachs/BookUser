@@ -65,6 +65,7 @@
                             display: flex;
                             align-items: center;
                             text-decoration: none;
+                            transition: all 0.2s linear;
                             &:hover {
                                 background-color: rgb(160, 160, 160, 0.2);
                                 color: #1ba085;
@@ -83,6 +84,10 @@
                     display: flex;
                     align-items: center;
                     font-size: 13px;
+                    transition: all 0.2s linear;
+                    &:hover {
+                        background-color: #097a63;
+                    }
                     .search-icon {
                         font-size: 20px;
                         margin-left: 5px;
@@ -108,13 +113,19 @@
                 background-color: #1ba085;
                 border-radius: 2px;
                 font-size: 13.5px;
+                transition: all 0.2s linear;
                 &:hover {
                     background-color: #097a63;
                 }
             }
             .tippy {
-                .vip-icon {
-                    font-size: 30px;
+                background-color: #1ba085;
+                .card-icon {
+                    font-size: 150px;
+                    height: 30px;
+                    width: 30px;
+                    color: aliceblue;
+                    background-color: #eeb815;
                 }
             }
         }
@@ -158,6 +169,23 @@
                     font-size: 15px;
                     text-decoration: none;
                     color: black;
+                    display: flex;
+                    align-items: center;
+                    .home-icon {
+                        font-size: 18px;
+                        margin-right: 10px;
+                    }
+                }
+                .link-menu-not{
+                    font-size: 15px;
+                    text-decoration: none;
+                    color: rgb(168, 168, 168);
+                    display: flex;
+                    align-items: center;
+                    .home-icon {
+                        font-size: 18px;
+                        margin-right: 10px;
+                    }
                 }
                 .link-menu:hover {
                     color: #1ba085;

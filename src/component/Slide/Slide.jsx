@@ -12,37 +12,27 @@ function Slide(props) {
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    src="https://mdbootstrap.com/img/Photos/Slides/img%20(15).jpg"
+                    src="https://307a0e78.vws.vegacdn.vn/view/v2/image/img.banner/0/0/0/2030_new.jpg?v=3&w=1580&h=400"
                     alt="First slide"
                 />
-                <Carousel.Caption>
+                {/* <Carousel.Caption>
                     <h3>First slide label</h3>
                     <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                </Carousel.Caption>
+                </Carousel.Caption> */}
             </Carousel.Item>
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    src="https://mdbootstrap.com/img/Photos/Slides/img%20(22).jpg"
+                    src="https://307a0e78.vws.vegacdn.vn/view/v2/image/img.banner/0/0/0/2000_new.jpg?v=3&w=1580&h=400"
                     alt="Second slide"
                 />
-
-                <Carousel.Caption>
-                    <h3>Second slide label</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    src="https://mdbootstrap.com/img/Photos/Slides/img%20(23).jpg"
+                    src="	https://307a0e78.vws.vegacdn.vn/view/v2/image/img.banner/0/0/0/2006_new.jpg?v=3&w=1580&h=400"
                     alt="Third slide"
                 />
-
-                <Carousel.Caption>
-                    <h3>Third slide label</h3>
-                    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                </Carousel.Caption>
             </Carousel.Item>
         </Carousel>
     );

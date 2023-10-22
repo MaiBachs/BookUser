@@ -34,6 +34,14 @@
                             color: rgb(238, 171, 26);
                             font-size: 18px;
                         }
+                        &:active {
+                            color: rgb(238, 171, 26);
+                            font-size: 18px;
+                        }
+                        &:focus {
+                            color: rgb(238, 171, 26);
+                            font-size: 18px;
+                        }
                     }
                 }
                 span {
@@ -60,11 +68,31 @@
                     font-size: 16px;
                     color: black;
                     text-align: start;
+                    margin-top: 20px;
                 }
                 h4 {
                     color: black;
                     font-size: 20px;
                     font-weight: 400;
+                }
+                button {
+                    border: 1px solid white;
+                    background-color: #1ba085;
+                    border-radius: 3px;
+                    font-size: 18px;
+                    transition: all 0.2s linear;
+                    .read-book {
+                        text-decoration: none;
+                        font-size: 18px;
+                        color: white;
+                    }
+                    &:hover {
+                        background-color: white;
+                        border: 1px #1ba085 solid;
+                        .read-book {
+                            color: #1ba085;
+                        }
+                    }
                 }
             }
         }

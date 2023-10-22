@@ -7,7 +7,6 @@ import classNames from 'classnames/bind';
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Linking } from 'react-native';
 import toastr from 'toastr';
 
 const cx = classNames.bind(styles);
@@ -21,7 +20,6 @@ const style = {
     height: 400,
     borderRadius: 3,
     bgcolor: 'background.paper',
-    border: '2px solid #000',
     boxShadow: 24,
     p: 4,
 };
@@ -45,9 +43,10 @@ function Login(props) {
     };
     const handleLogin = () => {
         axios
-            .post('https://host.up.railway.app/api/v1/auth/login', { ...loginForm })
+            .post('http://localhost:8083/api/v1/auth/login', { ...loginForm })
             .then((response) => {
                 localStorage.setItem('token', response.data.token);
+                localStorage.setItem('userName', loginForm.userName);
                 toastr.success('Đăng nhập thành công');
                 navigate('/');
             })
@@ -68,7 +67,7 @@ function Login(props) {
                     <Typography id="modal-modal-title" variant="h6" component="h2">
                         <img src="https://ebook.waka.vn/themes/desktop/images/logo-waka.png" alt="logo" />
                     </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    <Typography sx={{ mt: 2 }}>
                         <div className={cx('your-account')}>
                             <div className={cx('account_icon')}></div>
                             <input
@@ -80,11 +79,11 @@ function Login(props) {
                                 onChange={(event) => {
                                     checkInputLogin(event);
                                 }}
-                                placeholder="Tên đăng nhập / Email / SĐT"
+                                placeholder="Tên đăng nhập"
                             />
                         </div>
                     </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    <Typography sx={{ mt: 2 }}>
                         <div className={cx('your-password')}>
                             <div className={cx('password_icon')}></div>
                             <input
@@ -102,7 +101,9 @@ function Login(props) {
                     </Typography>
                     <Typography>
                         <div className={cx('register-forgot')}>
-                            <div className={cx('register')}>Đăng kí ngay</div>
+                            <div className={cx('register')} onClick={() => props.handleOpen1(props.handleClose())}>
+                                Đăng kí ngay
+                            </div>
                             <div className={cx('forgot')}>Quên mật khẩu</div>
                         </div>
                     </Typography>
@@ -113,7 +114,7 @@ function Login(props) {
                     </Typography>
                     <Typography>
                         <div className={cx('box-auth-panel')}>
-                            <span className={cx('top')}>Đăng nhập nhanh</span>
+                            <span className={cx('top')}>_______ Đăng nhập nhanh _______</span>
                             <ul className={cx('a-login-ul')}>
                                 <li className={cx('logo-fb')}>
                                     <a href="/facebook/auth.html?authclient=facebook" className={cx('a-login-fb')}>

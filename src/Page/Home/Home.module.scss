@@ -6,7 +6,7 @@
         display: flex;
         .news {
             width: 250px;
-            height: 956px;
+            height: 850px;
             border-radius: 5px;
             box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.2);
             ul {
@@ -41,8 +41,8 @@
         .free-hot {
             padding-left: 20px;
             flex: 1;
-            height: 956px;
-            max-height: 956px;
+            height: 850px;
+            max-height: 850px;
             max-width: 850px;
             .title-free-hot {
                 width: 820px;
@@ -50,6 +50,7 @@
                 color: black;
                 font-size: 20px;
                 text-align: start;
+                border-bottom: 1px solid rgba(33, 33, 33, 0.2);
             }
         }
     }
@@ -58,7 +59,8 @@
         height: 346px;
         margin-top: 40px;
         background-color: white;
-        .title-best-selling {
+        margin-bottom: 50px;
+        .title-rank {
             width: 1022px;
             height: 35px;
             margin-top: 10px;
@@ -80,7 +82,7 @@
                 }
             }
         }
-        .best-selling {
+        .best-rank {
             margin: auto;
             margin-top: 20px;
             width: 1050px;

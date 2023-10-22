@@ -75,7 +75,7 @@ function GrillBook(props) {
                     })}
                 </div>
             </div>
-            <nav aria-label="..." className="pagin mt-5">
+            <nav aria-label="..." className="pagin mt-3">
                 <ul class="pagination pagination-sm justify-content-end mr-5">
                     {props.listBookCT1.page <= 1 ? (
                         <li class="page-item disabled" key={'previos'}>

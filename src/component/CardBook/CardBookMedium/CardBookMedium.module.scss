@@ -10,6 +10,7 @@
         border-radius: 3px;
         box-shadow: 0 0 5px rgba(33, 33, 33, 0.2);
         background-color: white;
+        transition: all 0.2s linear;
         &:hover {
             border: 1px solid #1ba085;
         }
@@ -18,9 +19,9 @@
             height: 168px;
             display: flex;
             justify-content: space-evenly;
+            transition: all 0.2s linear;
             &:hover {
                 cursor: pointer;
-                transition: 3s;
                 .book-icon {
                     display: block;
                 }

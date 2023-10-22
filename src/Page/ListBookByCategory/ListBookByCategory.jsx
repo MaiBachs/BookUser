@@ -21,7 +21,7 @@ function ListBookByCategory() {
     const category = location.state;
     useEffect(() => {
         axios
-            .post('https://host.up.railway.app/getBookByCategory', {
+            .post('http://localhost:8083/get-book-by-category', {
                 page: listBookCT1.page,
                 size: size,
                 bookCategory: category,
@@ -36,7 +36,7 @@ function ListBookByCategory() {
             .catch((error) => {
                 console.log(error);
             });
-    }, []);
+    }, [category]);
     return (
         <div className={cx('wrapper')}>
             <DefaultLayout>

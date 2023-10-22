@@ -5,6 +5,7 @@
     border-radius: 3px;
     margin: 0 15px 0 15px;
     background-color: white;
+    transition: all 0.2s linear;
     &:hover {
         box-shadow: 0 0 15px rgba(33, 33, 33, 0.5);
     }
@@ -28,6 +29,7 @@
                 background-color: transparent;
                 border-radius: 3px;
                 font-size: 18px;
+                transition: all 0.2s linear;
                 .linkdetail-book {
                     color: white;
                     text-decoration: none;
@@ -47,24 +49,30 @@
                 font-size: 14px;
                 font-weight: 600;
                 line-height: 10px;
+                transition: all 0.2s linear;
                 &:hover {
                     text-decoration: underline;
                 }
             }
             span {
                 width: 120px;
-                max-height: 2.5em;
-                min-height: 2.5em;
+                max-height: 2.6em;
+                min-height: 2.6em;
+                overflow-y: hidden;
+
+                margin-bottom: 10px;
                 .hover-branch {
                     color: white;
                     text-decoration: none;
                     font-size: 14px;
+                    transition: all 0.2s linear;
                     &:hover {
                         text-decoration: underline;
                     }
                 }
             }
         }
+        transition: all 0.2s linear;
         &:hover {
             cursor: pointer;
             .coating {

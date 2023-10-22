@@ -34,13 +34,13 @@ function Home() {
 
     useEffect(() => {
         axios
-            .post('https://host.up.railway.app/getBookByPage', { page: listBookCT1.page, size: size })
+            .post('http://localhost:8083/get-book-by-page', { page: listBookCT1.page, size: size })
             .then((response) => {
                 setListBookCT1(response.data);
             })
             .catch((error) => console.log(error));
         axios
-            .get('https://host.up.railway.app/getAllBook')
+            .get('http://localhost:8083/get-all-book')
             .then((response) => {
                 setListBookCT2(response.data);
                 totalBook = listBookCT2.length;
@@ -50,7 +50,7 @@ function Home() {
 
     return (
         <div className={cx('wrapper')}>
-            <DefaultLayout listBookCT2={listBookCT2} setListBookCT2={setListBookCT2}>
+            <DefaultLayout listBookCT2={listBookCT2} setListBookCT2={setListBookCT2} check={true}>
                 <div>
                     <div className={cx('slide')}>
                         <Slide />
@@ -73,17 +73,16 @@ function Home() {
                         </div>
                     </div>
                     <div className={cx('content2')}>
-                        <div className={cx('title-best-selling')}>
-                            <div>Bán chạy nhất</div>
+                        <div className={cx('title-rank')}>
+                            <div>BẢNG XẾP HẠNG</div>
                             <div>
                                 <Link className={cx('link-viewall')}>Xem tất cả</Link>
                             </div>
                         </div>
-                        <div className={cx('best-selling')}>
+                        <div className={cx('best-rank')}>
                             <AliceCarousel
                                 mouseTracking
                                 disableDotsControls
-                                infinite
                                 keyboardNavigation
                                 items={listBookCT2.map((bookCT2) => {
                                     return <CardBookSmall bookCT2={bookCT2} />;
@@ -91,6 +90,36 @@ function Home() {
                                 responsive={{
                                     1324: { items: 6 },
                                 }}
+                                renderPrevButton={() => (
+                                    <button
+                                        style={{
+                                            position: 'absolute',
+                                            marginTop: '-170px',
+                                            marginLeft: '-550px',
+                                            backgroundColor: 'transparent',
+                                            border: 'none',
+                                            fontSize: '35px',
+                                            color: '#1ba085',
+                                        }}
+                                    >
+                                        {'<'}
+                                    </button>
+                                )}
+                                renderNextButton={() => (
+                                    <button
+                                        style={{
+                                            position: 'absolute',
+                                            marginTop: '-170px',
+                                            marginLeft: '256px',
+                                            backgroundColor: 'transparent',
+                                            border: 'none',
+                                            fontSize: '35px',
+                                            color: '#1ba085',
+                                        }}
+                                    >
+                                        {'>'}
+                                    </button>
+                                )}
                             />
                         </div>
                     </div>
